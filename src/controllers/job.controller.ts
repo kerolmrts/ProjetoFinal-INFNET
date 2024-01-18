@@ -12,6 +12,19 @@ export const getAllJobs = async (req: Request, res: Response) => {
     }
 }
 
+export const createJob = async (req: Request, res: Response) => {
+    try {
+        const newJob = new Job(req.body);
+        console.log(newJob)
+        const savedJob = await newJob.save();
+        res.status(200).json(savedJob);
+        
+        
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+
 export const getJobsByName = async (req: Request, res: Response) => {    
     try {
         const jobs = await Job.find({'title': { $regex: new RegExp('.*' + req.params.name + '.*', "i") } });

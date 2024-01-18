@@ -9,7 +9,7 @@ import cors from 'cors';
 require("dotenv").config()
 
 const app = express()
-const PORT = 3000;
+const PORT = 3300;
 
 const corsOptions = {
     origin: '*',
