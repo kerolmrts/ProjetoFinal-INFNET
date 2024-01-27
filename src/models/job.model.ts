@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from "mongoose";
 interface IJob extends Document {
   job_title: string;
   job_requirements: string;
+  job_description: string;
   job_category: string;
   job_shift: string;
   job_type: string;
@@ -15,12 +16,14 @@ interface IJob extends Document {
 
 const jobSchema = new Schema({
   job_title: { type: String, required: true },
+  job_description: { type: String, required: false },
   job_requirements: { type: String, required: false },
   job_category: { type: String, required: true },
   job_type: { type: String, required: true },
   job_shift: { type: String, required: false },
   job_pay: { type: String, required: false },
-  job_image: { type: String, required: true },
+  job_mail: { type: String, required: true },
+  job_image: { type: String, required: false },
   job_createdAt: { type: Number, required: true, default: Date.now },
   job_updatedAt: { type: Number, required: true, default: Date.now },
   job_clicks: { type: Number, required: true, default: 0 },
