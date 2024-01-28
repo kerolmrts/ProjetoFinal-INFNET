@@ -23,21 +23,18 @@ const jobSchema = new Schema({
   job_shift: { type: String, required: false },
   job_pay: { type: String, required: false },
   job_mail: { type: String, required: true },
-  job_image: { type: String, required: false },
-  job_createdAt: { type: Number, required: true, default: Date.now },
-  job_updatedAt: { type: Number, required: true, default: Date.now },
+  job_image: { type: String, required: true },
+  job_createdAt: { type: Date, required: true, default: Date.now },
+  job_updatedAt: { type: Date, required: true, default: Date.now },
   job_clicks: { type: Number, required: true, default: 0 },
-});
+},
+{timestamps:{
+  createdAt: 'job_createdAt',
+  updatedAt: 'job_updatedAt'
+}});
 
-jobSchema.pre<IJob>('save', function (next) {
-  const currentDate = Date.now();
-  this.job_updatedAt = currentDate;
-  if (!this.job_createdAt) {
-    this.job_createdAt = currentDate;
-  }
-  next();
-});
 
-const Job = mongoose.model<IJob>('job', jobSchema);
+
+const Job = mongoose.model<IJob>("job", jobSchema);
 
 export default Job;

@@ -9,35 +9,36 @@ const saltRounds = 10;
 const jsonSecret = 'MinhaSenhaJSONwebToken#2023'
 
 export const createUser = async (req: Request, res: Response) => {
-    try {
-        fileUpload.single('user_image')(req, res, async (err: any) =>{
+    console.log(req.body)
+        try {
+        // fileUpload.single('user_image')(req, res, async (err: any) =>{
 
-            if(err){
-                console.error('Erro ao fazer upload de imagem: ', err)
-                res.status(500).json({error: 'Erro ao fazer upload de imagem'})
-                return;
-            }
+            // if(err){
+            //     console.error('Erro ao fazer upload de imagem: ', err)
+            //     res.status(500).json({error: 'Erro ao fazer upload de imagem'})
+            //     return;
+            // }
         
             const hashedPassword = await bcrypt.hash(req.body.user_password, saltRounds);
             console.log(hashedPassword);
 
             req.body.user_password = hashedPassword;
 
-            const user_image = req.file ? req.file.filename : '';
+            // const user_image = req.file ? req.file.filename : '';
 
-            req.body.user_image = user_image;
+            // req.body.user_image = user_image;
 
-            console.log(req.body.user_role);
+            // console.log(req.body.user_role);
 
-            console.log("Req file:" + req.file)
-            console.log("Imagem nome:" + user_image)
-            console.log("Imagem:" + req.body.user_image)
+            // console.log("Req file:" + req.file)
+            // console.log("Imagem nome:" + user_image)
+            // console.log("Imagem:" + req.body.user_image)
 
             const newUser = new User(req.body);
             const savedUser = await newUser.save();
 
             res.status(200).json(savedUser);
-    })
+    // })
     } catch (error) {
         res.status(500).json(error)
     }

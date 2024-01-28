@@ -10,18 +10,13 @@ var jobSchema = new mongoose_1.Schema({
     job_shift: { type: String, required: false },
     job_pay: { type: String, required: false },
     job_mail: { type: String, required: true },
-    job_image: { type: String, required: false },
-    job_createdAt: { type: Number, required: true, default: Date.now },
-    job_updatedAt: { type: Number, required: true, default: Date.now },
+    job_image: { type: String, required: true },
+    job_createdAt: { type: Date, required: true, default: Date.now },
+    job_updatedAt: { type: Date, required: true, default: Date.now },
     job_clicks: { type: Number, required: true, default: 0 },
-});
-jobSchema.pre('save', function (next) {
-    var currentDate = Date.now();
-    this.job_updatedAt = currentDate;
-    if (!this.job_createdAt) {
-        this.job_createdAt = currentDate;
-    }
-    next();
-});
-var Job = mongoose_1.default.model('job', jobSchema);
+}, { timestamps: {
+        createdAt: 'job_createdAt',
+        updatedAt: 'job_updatedAt'
+    } });
+var Job = mongoose_1.default.model("job", jobSchema);
 exports.default = Job;
