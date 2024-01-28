@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {Request, Response} from 'express';
 import User from '../models/user.model';
-import fileUpload from '../middlewares/fileUploadMiddleware'
+// import fileUpload from '../middlewares/fileUploadMiddleware'
 
 const saltRounds = 10;
 const jsonSecret = 'MinhaSenhaJSONwebToken#2023'
@@ -57,9 +57,10 @@ export const deleteUser = async (req: Request, res: Response) => {
 }
 
 export const authUser = async (req: Request, res: Response) => {
-    const { user_username, user_password } = req.body;
+    const { email, password } = req.body;
+    console.log(email, password)
 
-    const user = await User.findOne({'user_username': user_username});
+    const user = await User.findOne({'user_email': email});
     console.log(user)
     
     if(!user){
@@ -67,7 +68,7 @@ export const authUser = async (req: Request, res: Response) => {
         return;
     }
 
-    const isPassValid = await bcrypt.compare(user_password, user.user_password);
+    const isPassValid = await bcrypt.compare(password, user.user_password);
 
     if(!isPassValid){
         res.status(500).json({'error': 'Senha não encontrada'});

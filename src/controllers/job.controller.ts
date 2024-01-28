@@ -12,6 +12,15 @@ export const getAllJobs = async (req: Request, res: Response) => {
     }
 }
 
+export const getJobById = async (req: Request, res: Response) => {
+     try {
+    const job = await Job.findById(req.params.id);
+    res.status(200).json(job);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 export const createJob = async (req: Request, res: Response) => {
     try {
         const newJob = new Job(req.body);
@@ -24,6 +33,19 @@ export const createJob = async (req: Request, res: Response) => {
         res.status(500).json(error);
     }
 }
+
+export const editJobById = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.id;
+    const updatedJob = await Job.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(200).json(updatedJob);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 
 export const getJobsByName = async (req: Request, res: Response) => {    
     try {

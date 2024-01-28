@@ -14,6 +14,7 @@ var jobSchema = new mongoose_1.Schema({
     job_createdAt: { type: Date, required: true, default: Date.now },
     job_updatedAt: { type: Date, required: true, default: Date.now },
     job_clicks: { type: Number, required: true, default: 0 },
+    job_company: { type: String, required: false },
 }, { timestamps: {
         createdAt: 'job_createdAt',
         updatedAt: 'job_updatedAt'

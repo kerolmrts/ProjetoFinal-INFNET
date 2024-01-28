@@ -12,6 +12,7 @@ interface IJob extends Document {
   job_createdAt: number; // Alterado para number para armazenar timestamps
   job_updatedAt: number; // Alterado para number para armazenar timestamps
   job_clicks: number;
+  job_company: string;
 }
 
 const jobSchema = new Schema({
@@ -27,6 +28,7 @@ const jobSchema = new Schema({
   job_createdAt: { type: Date, required: true, default: Date.now },
   job_updatedAt: { type: Date, required: true, default: Date.now },
   job_clicks: { type: Number, required: true, default: 0 },
+  job_company: { type: String, required: false },
 },
 {timestamps:{
   createdAt: 'job_createdAt',
