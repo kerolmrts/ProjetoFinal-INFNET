@@ -2,8 +2,8 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import jobRoutes from './routes/job.routes'
-import userRoutes from '../src/routes/user.routes'
-import authRoutes from '../src/routes/auth.routes'
+import userRoutes from './routes/user.routes'
+import authRoutes from './routes/auth.routes'
 import cors from 'cors';
 
 require("dotenv").config()
